@@ -1,40 +1,40 @@
-# 🎯 TaskMaster Pro - Enterprise QA Engineering Project
+# TaskMaster Pro - Enterprise QA Engineering Project
 
 [![CI/CD Pipeline](https://github.com/hashaam-011/SQA-Engineer/actions/workflows/ci.yml/badge.svg)](https://github.com/hashaam-011/SQA-Engineer/actions/workflows/ci.yml)
 [![Code Coverage](https://img.shields.io/badge/coverage-88.67%25-brightgreen)](./server/coverage)
 [![Tests](https://img.shields.io/badge/tests-36%20passing-success)](#test-results)
 [![Cypress](https://img.shields.io/badge/e2e-cypress-brightgreen)](./client/cypress)
 
-> **Professional-grade task management application with comprehensive test automation, CI/CD integration, and advanced quality assurance practices.**
+**Professional-grade task management application with comprehensive test automation, CI/CD integration, and advanced quality assurance practices.**
 
-## 🌟 **Project Highlights**
+## Project Highlights
 
-- **🎭 Full-Stack Application**: React frontend + Express.js backend
-- **🧪 Comprehensive Testing**: 36 test cases (15 UI + 21 API)
-- **🚀 CI/CD Integration**: GitHub Actions with multi-environment testing
-- **📊 Advanced Coverage**: Enhanced reporting with nyc
-- **📸 Visual Testing**: Cypress snapshots for UI consistency
-- **⚡ Professional QA**: Industry-standard testing practices
+- **Full-Stack Application**: React frontend + Express.js backend
+- **Comprehensive Testing**: 36 test cases (15 UI + 21 API)
+- **CI/CD Integration**: GitHub Actions with multi-environment testing
+- **Advanced Coverage**: Enhanced reporting with nyc
+- **Visual Testing**: Cypress snapshots for UI consistency
+- **Professional QA**: Industry-standard testing practices
 
 ---
 
-## 🏗️ **Architecture Overview**
+## Architecture Overview
 
 ```
 TaskMaster Pro
-├── 🎨 Frontend (React 19.1.0)
+├── Frontend (React 19.1.0)
 │   ├── Authentication System
 │   ├── Todo Management (CRUD)
 │   ├── Dark/Light Theme Toggle
 │   └── Responsive Design
 │
-├── ⚙️ Backend (Express.js 5.1.0)
+├── Backend (Express.js 5.1.0)
 │   ├── RESTful API Endpoints
 │   ├── In-Memory Data Storage
 │   ├── CORS-Enabled
 │   └── Comprehensive Error Handling
 │
-└── 🧪 Testing Infrastructure
+└── Testing Infrastructure
     ├── Cypress (UI E2E Testing)
     ├── Jest + Supertest (API Testing)
     ├── GitHub Actions (CI/CD)
@@ -43,29 +43,29 @@ TaskMaster Pro
 
 ---
 
-## 🎯 **Features**
+## Features
 
-### **Core Application Features**
-- ✅ **User Authentication** - Secure login/logout system
-- ✅ **Todo Management** - Full CRUD operations
-- ✅ **Real-time Statistics** - Task completion tracking
-- ✅ **Theme Switcher** - Dark/Light mode toggle
-- ✅ **Responsive Design** - Mobile-first approach
-- ✅ **Error Handling** - Comprehensive user feedback
+### Core Application Features
+- **User Authentication** - Secure login/logout system
+- **Todo Management** - Full CRUD operations
+- **Real-time Statistics** - Task completion tracking
+- **Theme Switcher** - Dark/Light mode toggle
+- **Responsive Design** - Mobile-first approach
+- **Error Handling** - Comprehensive user feedback
 
-### **Quality Assurance Features**
-- ✅ **Comprehensive Test Suite** - 36 automated test cases
-- ✅ **CI/CD Pipeline** - Automated testing on every commit
-- ✅ **Code Coverage Reports** - 88.67% coverage with detailed analytics
-- ✅ **Visual Testing** - Screenshot comparison for UI consistency
-- ✅ **Cross-Browser Testing** - Chrome, Firefox, Safari support
-- ✅ **Performance Monitoring** - Load time and responsiveness checks
+### Quality Assurance Features
+- **Comprehensive Test Suite** - 36 automated test cases
+- **CI/CD Pipeline** - Automated testing on every commit
+- **Code Coverage Reports** - 88.67% coverage with detailed analytics
+- **Visual Testing** - Screenshot comparison for UI consistency
+- **Cross-Browser Testing** - Chrome, Firefox, Safari support
+- **Performance Monitoring** - Load time and responsiveness checks
 
 ---
 
-## 🚀 **Quick Start**
+## Quick Start
 
-### **Prerequisites**
+### Prerequisites
 ```bash
 Node.js v18+
 npm v8+
@@ -73,7 +73,7 @@ Git
 Modern Browser (Chrome/Firefox/Safari)
 ```
 
-### **Installation & Setup**
+### Installation & Setup
 ```bash
 # Clone the repository
 git clone https://github.com/hashaam-011/SQA-Engineer.git
@@ -88,17 +88,17 @@ cd ../client
 npm install
 ```
 
-### **Running the Application**
+### Running the Application
 ```bash
 # Terminal 1: Start Backend Server
 cd server
 npm start
-# 🚀 Server running on http://localhost:5000
+# Server running on http://localhost:5000
 
 # Terminal 2: Start Frontend Server
 cd client
 npm start
-# 🎨 Client running on http://localhost:3000
+# Client running on http://localhost:3000
 ```
 
 ### **Demo Credentials**
