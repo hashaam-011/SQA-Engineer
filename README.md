@@ -7,7 +7,7 @@
 
 **Professional-grade task management application with comprehensive test automation, CI/CD integration, and advanced quality assurance practices.**
 
-## Project Highlights
+Project Highlights
 
 - **Full-Stack Application**: React frontend + Express.js backend
 - **Comprehensive Testing**: 36 test cases (15 UI + 21 API)
@@ -18,7 +18,7 @@
 
 ---
 
-## Architecture Overview
+Architecture Overview
 
 ```
 TaskMaster Pro
@@ -43,7 +43,7 @@ TaskMaster Pro
 
 ---
 
-## Features
+Features
 
 ### Core Application Features
 - **User Authentication** - Secure login/logout system
@@ -109,7 +109,7 @@ Password: testpass
 
 ---
 
-## 🧪 **Testing Guide**
+**Testing Guide**
 
 ### **API Testing (Jest + Supertest)**
 ```bash
@@ -128,11 +128,11 @@ npm run test:watch
 npm run coverage:html
 ```
 
-**📊 Current API Test Results:**
-- ✅ **21 Test Cases** - All passing
-- ✅ **88.67% Statement Coverage**
-- ✅ **95% Branch Coverage**
-- ✅ **90% Function Coverage**
+**Current API Test Results:**
+- **21 Test Cases** - All passing
+- **88.67% Statement Coverage**
+- **95% Branch Coverage**
+- **90% Function Coverage**
 
 ### **UI Testing (Cypress E2E)**
 ```bash
@@ -148,11 +148,11 @@ npx cypress run --spec cypress/e2e/ui-tests.spec.js
 npm run test:e2e
 ```
 
-**🎭 Current UI Test Results:**
-- ✅ **15 Test Cases** - All passing
-- ✅ **Complete User Workflows** - Login to logout
-- ✅ **Responsive Testing** - Mobile/Desktop/Tablet
-- ✅ **Visual Snapshots** - UI consistency verification
+**Current UI Test Results:**
+- **15 Test Cases** - All passing
+- **Complete User Workflows** - Login to logout
+- **Responsive Testing** - Mobile/Desktop/Tablet
+- **Visual Snapshots** - UI consistency verification
 
 ### **Running All Tests**
 ```bash
@@ -167,22 +167,22 @@ git push origin main
 
 ---
 
-## 🔄 **CI/CD Pipeline**
+**CI/CD Pipeline**
 
 Our **GitHub Actions workflow** provides enterprise-grade automation:
 
 ### **Pipeline Stages**
-1. **🧪 API Testing** - Jest/Supertest execution across Node.js 18.x & 20.x
-2. **🎭 UI Testing** - Cypress E2E testing with video/screenshot capture
-3. **🔍 Code Quality** - ESLint, security audits, and dependency checks
-4. **🚀 Deployment Check** - Build verification and readiness assessment
+1. **API Testing** - Jest/Supertest execution across Node.js 18.x & 20.x
+2. **UI Testing** - Cypress E2E testing with video/screenshot capture
+3. **Code Quality** - ESLint, security audits, and dependency checks
+4. **Deployment Check** - Build verification and readiness assessment
 
 ### **Advanced Features**
-- **✅ Multi-Node Testing** - Tests run on Node.js 18.x and 20.x
-- **✅ Artifact Collection** - Screenshots/videos on test failures
-- **✅ Coverage Reporting** - Automated coverage uploads to Codecov
-- **✅ Security Scanning** - Dependency vulnerability assessment
-- **✅ Build Verification** - Production readiness confirmation
+- **Multi-Node Testing** - Tests run on Node.js 18.x and 20.x
+- **Artifact Collection** - Screenshots/videos on test failures
+- **Coverage Reporting** - Automated coverage uploads to Codecov
+- **Security Scanning** - Dependency vulnerability assessment
+- **Build Verification** - Production readiness confirmation
 
 ### **Triggering CI/CD**
 ```bash
@@ -197,7 +197,7 @@ git push origin feature/new-feature
 
 ---
 
-## 📊 **Test Coverage Details**
+**Test Coverage Details**
 
 ### **API Coverage (Enhanced with nyc)**
 ```
@@ -208,35 +208,35 @@ File Coverage Summary:
 └── Lines: 88.23% (45/51)
 
 Detailed Reports Available:
-├── 📄 Text Report: Terminal output
-├── 📊 HTML Report: ./server/coverage/lcov-report/index.html
-└── 📈 LCOV Report: ./server/coverage/lcov.info
+├── Text Report: Terminal output
+├── HTML Report: ./server/coverage/lcov-report/index.html
+└── LCOV Report: ./server/coverage/lcov.info
 ```
 
-### **UI Coverage (Cypress E2E)**
+**UI Coverage (Cypress E2E)**
 ```
 Test Scenarios Covered:
-├── 🔐 Authentication: 4/4 scenarios
-├── 📝 CRUD Operations: 9/9 scenarios
-├── 🎨 UI Features: 2/2 scenarios
-├── 📱 Responsive Design: 1/1 scenarios
-└── 🎭 Visual Testing: Baseline snapshots captured
+├── Authentication: 4/4 scenarios
+├── CRUD Operations: 9/9 scenarios
+├── UI Features: 2/2 scenarios
+├── Responsive Design: 1/1 scenarios
+└── Visual Testing: Basic screenshots captured
 
 Browser Coverage:
-├── ✅ Chrome/Chromium (Primary)
-├── ✅ Electron (CI/CD)
-└── 🔄 Firefox/Safari (Configuration ready)
+├── Chrome/Chromium (Primary)
+├── Electron (CI/CD)
+└── Firefox/Safari (Configuration ready)
 ```
 
 ---
 
-## 📸 **Visual Testing**
+## Visual Testing
 
-### **Snapshot Testing Features**
-- **📸 Automated Screenshots** - Baseline image capture
-- **🔍 Visual Comparison** - Pixel-perfect difference detection
-- **📱 Responsive Snapshots** - Multi-viewport testing
-- **⚙️ Configurable Thresholds** - Customizable sensitivity settings
+### **Screenshot Testing Features**
+- **Automated Screenshots** - Basic image capture during tests
+- **Responsive Screenshots** - Multi-viewport testing
+- **Test Documentation** - Visual record of test execution
+- **Failure Analysis** - Screenshots captured on test failures
 
 ### **Visual Test Commands**
 ```javascript
@@ -257,33 +257,32 @@ cy.loginWithVisual('testuser', 'testpass')
 
 ---
 
-## 📁 **Project Structure**
+**Project Structure**
 
 ```
 SQA-Engineer/
-├── 📂 .github/workflows/         # CI/CD Pipeline
+├── .github/workflows/           # CI/CD Pipeline
 │   └── ci.yml                   # GitHub Actions configuration
-├── 📂 client/                   # React Frontend
-│   ├── 📂 cypress/              # E2E Testing Suite
-│   │   ├── 📂 e2e/              # Test specifications
-│   │   ├── 📂 support/          # Custom commands & utilities
-│   │   ├── 📂 screenshots/      # Test failure screenshots
-│   │   └── 📂 snapshots/        # Visual testing baselines
-│   ├── 📂 src/                  # React application source
-│   └── 📄 package.json          # Frontend dependencies
-├── 📂 server/                   # Express.js Backend
-│   ├── 📂 __tests__/            # API test suite
-│   ├── 📂 coverage/             # Coverage reports
-│   ├── 📄 server.js             # Main server file
-│   └── 📄 package.json          # Backend dependencies
-├── 📄 test-plan.md              # Comprehensive test documentation
-├── 📄 TESTING.md                # Detailed testing instructions
-└── 📄 README.md                 # This file
+├── client/                      # React Frontend
+│   ├── cypress/                 # E2E Testing Suite
+│   │   ├── e2e/                 # Test specifications
+│   │   ├── support/             # Custom commands & utilities
+│   │   ├── screenshots/         # Test failure screenshots
+│   │   └── videos/              # Test execution videos
+│   ├── src/                     # React application source
+│   └── package.json             # Frontend dependencies
+├── server/                      # Express.js Backend
+│   ├── __tests__/               # API test suite
+│   ├── coverage/                # Coverage reports
+│   ├── server.js                # Main server file
+│   └── package.json             # Backend dependencies
+├── test-plan.md                 # Comprehensive test documentation
+└── README.md                    # This file
 ```
 
 ---
 
-## 🎯 **Quality Metrics**
+## Quality Metrics
 
 ### **Test Execution Performance**
 | Test Suite | Test Count | Execution Time | Success Rate |
@@ -293,15 +292,15 @@ SQA-Engineer/
 | **Total**  | **36**     | **~82 seconds** | **100%**     |
 
 ### **Code Quality Standards**
-- ✅ **ESLint Compliance** - JavaScript code standards
-- ✅ **Security Auditing** - Dependency vulnerability scanning
-- ✅ **Test Coverage** - Minimum 80% requirement exceeded
-- ✅ **Documentation** - Comprehensive guides and comments
-- ✅ **CI/CD Integration** - Automated quality gates
+- **ESLint Compliance** - JavaScript code standards
+- **Security Auditing** - Dependency vulnerability scanning
+- **Test Coverage** - Minimum 80% requirement exceeded
+- **Documentation** - Comprehensive guides and comments
+- **CI/CD Integration** - Automated quality gates
 
 ---
 
-## 🔧 **Advanced Configuration**
+**Advanced Configuration**
 
 ### **Environment Variables**
 ```bash
@@ -325,18 +324,18 @@ CYPRESS_failureThreshold=0.1
 }
 ```
 
-### **Visual Testing Settings**
+### **Cypress Testing Settings**
 ```json
 {
-  "failureThreshold": 0.1,
-  "thresholdType": "percent",
+  "video": true,
+  "screenshotOnRunFailure": true,
   "experimentalSessionAndOrigin": true
 }
 ```
 
 ---
 
-## 🚀 **Deployment & Production**
+**Deployment & Production**
 
 ### **Production Build**
 ```bash
@@ -358,16 +357,15 @@ FROM node:18-alpine as builder
 
 ---
 
-## 📚 **Documentation**
+**Documentation**
 
-- **📋 [Test Plan](./test-plan.md)** - Comprehensive testing strategy
-- **🧪 [Testing Guide](./TESTING.md)** - Detailed testing instructions
-- **🔄 [CI/CD Documentation](./.github/workflows/ci.yml)** - Pipeline configuration
-- **📊 [Coverage Reports](./server/coverage/)** - Detailed analytics
+- **[Test Plan](./test-plan.md)** - Comprehensive testing strategy
+- **[CI/CD Configuration](./.github/workflows/ci.yml)** - Pipeline configuration
+- **[Coverage Reports](./server/coverage/)** - Detailed analytics
 
 ---
 
-## 🤝 **Contributing**
+**Contributing**
 
 ### **Development Workflow**
 1. **Fork & Clone** - Create your development environment
@@ -376,27 +374,27 @@ FROM node:18-alpine as builder
 4. **Quality Checks** - Ensure all tests pass and coverage requirements met
 5. **Pull Request** - Submit with comprehensive description
 
-### **Quality Requirements**
-- ✅ All existing tests must pass
-- ✅ New features require corresponding tests
-- ✅ Code coverage must not decrease
-- ✅ ESLint standards compliance
-- ✅ Documentation updates included
+**Quality Requirements**
+- All existing tests must pass
+- New features require corresponding tests
+- Code coverage must not decrease
+- ESLint standards compliance
+- Documentation updates included
 
 ---
 
-## 🏆 **Project Achievements**
+**Project Achievements**
 
-- ✅ **100% Test Success Rate** - All 36 tests passing consistently
-- ✅ **88.67% Code Coverage** - Exceeding industry standards
-- ✅ **Automated CI/CD** - Enterprise-grade deployment pipeline
-- ✅ **Visual Testing** - Pixel-perfect UI consistency
-- ✅ **Multi-Browser Support** - Cross-platform compatibility
-- ✅ **Professional Documentation** - Comprehensive guides and standards
+- **100% Test Success Rate** - All 36 tests passing consistently
+- **88.67% Code Coverage** - Exceeding industry standards
+- **Automated CI/CD** - Enterprise-grade deployment pipeline
+- **Visual Testing** - Screenshot-based UI validation
+- **Multi-Browser Support** - Cross-platform compatibility
+- **Professional Documentation** - Comprehensive guides and standards
 
 ---
 
-## 📞 **Support & Contact**
+**Support & Contact**
 
 **Repository**: [https://github.com/hashaam-011/SQA-Engineer](https://github.com/hashaam-011/SQA-Engineer)
 
