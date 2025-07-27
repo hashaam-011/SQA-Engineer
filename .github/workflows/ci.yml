@@ -1,0 +1,187 @@
+name: TaskMaster Pro - CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  # API Testing Job
+  api-tests:
+    name: 🧪 API Tests (Jest + Supertest)
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+
+    defaults:
+      run:
+        working-directory: ./server
+
+    steps:
+    - name: 📥 Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: 🟢 Setup Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+        cache-dependency-path: server/package-lock.json
+
+    - name: 📦 Install Dependencies
+      run: npm ci
+
+    - name: 🧪 Run API Tests
+      run: npm test
+
+    - name: 📊 Upload Coverage Reports
+      uses: codecov/codecov-action@v3
+      with:
+        file: ./server/coverage/lcov.info
+        flags: api-tests
+        name: API Coverage
+        fail_ci_if_error: false
+
+  # UI Testing Job
+  ui-tests:
+    name: 🎭 UI Tests (Cypress E2E)
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+
+    steps:
+    - name: 📥 Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: 🟢 Setup Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+        cache-dependency-path: |
+          server/package-lock.json
+          client/package-lock.json
+
+    - name: 📦 Install Server Dependencies
+      working-directory: ./server
+      run: npm ci
+
+    - name: 📦 Install Client Dependencies
+      working-directory: ./client
+      run: npm ci
+
+    - name: 🚀 Start Backend Server
+      working-directory: ./server
+      run: npm start &
+
+    - name: ⏳ Wait for Backend
+      run: |
+        timeout 30 bash -c 'until curl -f http://localhost:5000; do sleep 1; done'
+
+    - name: 🚀 Start Frontend Server
+      working-directory: ./client
+      run: npm start &
+
+    - name: ⏳ Wait for Frontend
+      run: |
+        timeout 60 bash -c 'until curl -f http://localhost:3000; do sleep 1; done'
+
+    - name: 🎭 Run Cypress Tests
+      working-directory: ./client
+      run: npx cypress run --spec cypress/e2e/ui-tests.spec.js
+
+    - name: 📸 Upload Screenshots
+      uses: actions/upload-artifact@v3
+      if: failure()
+      with:
+        name: cypress-screenshots-${{ matrix.node-version }}
+        path: client/cypress/screenshots
+
+    - name: 🎥 Upload Videos
+      uses: actions/upload-artifact@v3
+      if: failure()
+      with:
+        name: cypress-videos-${{ matrix.node-version }}
+        path: client/cypress/videos
+
+  # Code Quality & Security
+  code-quality:
+    name: 🔍 Code Quality & Security
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: 📥 Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: 🟢 Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20.x'
+        cache: 'npm'
+        cache-dependency-path: |
+          server/package-lock.json
+          client/package-lock.json
+
+    - name: 📦 Install Dependencies
+      run: |
+        cd server && npm ci
+        cd client && npm ci
+
+    - name: 🔍 Run ESLint (Server)
+      working-directory: ./server
+      run: npx eslint . --ext .js || true
+
+    - name: 🔍 Run ESLint (Client)
+      working-directory: ./client
+      run: npx eslint src --ext .js,.jsx || true
+
+    - name: 🛡️ Run Security Audit
+      run: |
+        cd server && npm audit --audit-level=high || true
+        cd client && npm audit --audit-level=high || true
+
+  # Deployment Readiness Check
+  deployment-check:
+    name: 🚀 Deployment Readiness
+    runs-on: ubuntu-latest
+    needs: [api-tests, ui-tests, code-quality]
+
+    steps:
+    - name: 📥 Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: 🟢 Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20.x'
+        cache: 'npm'
+        cache-dependency-path: |
+          server/package-lock.json
+          client/package-lock.json
+
+    - name: 📦 Install Dependencies
+      run: |
+        cd server && npm ci
+        cd client && npm ci
+
+    - name: 🏗️ Build Client
+      working-directory: ./client
+      run: npm run build
+
+    - name: ✅ Deployment Ready
+      run: echo "🎉 All tests passed! Ready for deployment."
+
+    - name: 📝 Generate Test Report
+      run: |
+        echo "## 📊 Test Results Summary" >> $GITHUB_STEP_SUMMARY
+        echo "- ✅ API Tests: Passed" >> $GITHUB_STEP_SUMMARY
+        echo "- ✅ UI Tests: Passed" >> $GITHUB_STEP_SUMMARY
+        echo "- ✅ Code Quality: Checked" >> $GITHUB_STEP_SUMMARY
+        echo "- ✅ Build: Successful" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "🚀 **Ready for Production Deployment!**" >> $GITHUB_STEP_SUMMARY
