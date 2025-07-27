@@ -1,12 +1,12 @@
 # TaskMaster Pro - Test Plan Documentation
 
-## 📋 Overview
+## Overview
 
 This document outlines the comprehensive testing strategy for TaskMaster Pro, a full-stack task management application. The testing approach covers both UI automation and API testing to ensure complete functionality and reliability.
 
-## 🎯 What is Being Tested
+## What is Being Tested
 
-### **UI Testing (Frontend)**
+### UI Testing (Frontend)
 - **Login Functionality**
   - Login page element display
   - Successful authentication with valid credentials
@@ -27,7 +27,7 @@ This document outlines the comprehensive testing strategy for TaskMaster Pro, a 
   - Responsive design (mobile viewport)
   - Message notifications and error handling
 
-### **API Testing (Backend)**
+### API Testing (Backend)
 - **Authentication Endpoints**
   - POST /api/login - Valid and invalid credential scenarios
   - Error handling for missing/malformed requests
@@ -42,9 +42,9 @@ This document outlines the comprehensive testing strategy for TaskMaster Pro, a 
   - GET / - Server status verification
   - GET /api/test - API functionality verification
 
-## 📊 Test Coverage
+## Test Coverage
 
-### **UI Test Coverage (Cypress)**
+### UI Test Coverage (Cypress)
 - **15 Active Test Cases** covering complete user workflows
 - **Login Flow**: 4 test scenarios
 - **Dashboard Operations**: 9 test scenarios
@@ -52,37 +52,37 @@ This document outlines the comprehensive testing strategy for TaskMaster Pro, a 
 - **Cross-browser compatibility** with Electron/Chrome
 - **Responsive design** testing on multiple viewports
 
-### **API Test Coverage (Jest + Supertest)**
+### API Test Coverage (Jest + Supertest)
 - **21 Test Cases** with 88.46% code coverage
 - **Authentication**: 5 test scenarios (positive/negative)
 - **CRUD Operations**: 12 test scenarios
 - **Error Handling**: 2 test scenarios
 - **Data Integrity**: 2 test scenarios
 
-## 🛠️ Testing Tools
+## Testing Tools
 
-### **UI Automation**
+### UI Automation
 - **Cypress v14.5.3** - End-to-end testing framework
 - **Test Runner**: Electron browser (headless mode)
 - **Assertions**: Cypress built-in assertions
 - **Custom Commands**: Login, CRUD operations helpers
 
-### **API Testing**
+### API Testing
 - **Jest v29.7.0** - Testing framework
 - **Supertest v7.1.4** - HTTP assertion library
 - **Coverage Reporting**: LCOV, HTML reports
 - **Test Environment**: Node.js
 
-## 🚀 How to Run Tests
+## How to Run Tests
 
-### **Prerequisites**
+### Prerequisites
 ```bash
 # Install dependencies
 cd server && npm install
 cd client && npm install
 ```
 
-### **Start Application Servers**
+### Start Application Servers
 ```bash
 # Terminal 1: Start backend server
 cd server
@@ -95,7 +95,7 @@ npm start
 # Client runs on http://localhost:3000
 ```
 
-### **Run UI Tests (Cypress)**
+### Run UI Tests (Cypress)
 
 **Interactive Mode (Recommended for Development):**
 ```bash
@@ -115,7 +115,7 @@ cd client
 npm run test:e2e
 ```
 
-### **Run API Tests (Jest + Supertest)**
+### Run API Tests (Jest + Supertest)
 
 **Full Test Suite:**
 ```bash
