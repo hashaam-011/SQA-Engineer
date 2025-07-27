@@ -1,16 +1,4 @@
-// ***********************************************
-// This example commands.js shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
 
-// Visual testing plugin removed - not needed for basic functionality
-
-// Custom command to wait for page load
 Cypress.Commands.add('waitForPageLoad', () => {
   cy.get('body').should('be.visible')
 })
@@ -22,6 +10,7 @@ Cypress.Commands.add('elementExists', (selector) => {
       return true
     } else {
       return false
+      //ok
     }
   })
 })
