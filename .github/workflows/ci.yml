@@ -6,6 +6,11 @@ on:
   pull_request:
     branches: [ main ]
 
+env:
+  CI: true
+  NODE_ENV: test
+  CYPRESS_CACHE_FOLDER: ~/.cache/Cypress
+
 jobs:
   # API Testing Job
   api-tests:
@@ -81,29 +86,48 @@ jobs:
 
     - name: ⏳ Wait for Backend
       run: |
-        timeout 30 bash -c 'until curl -f http://localhost:5000; do sleep 1; done'
+        echo "⏳ Waiting for backend server to start..."
+        timeout 30 bash -c 'until curl -f http://localhost:5000; do echo "Waiting for backend..."; sleep 2; done' || (echo "❌ Backend failed to start" && exit 1)
+        echo "✅ Backend server is running!"
 
     - name: 🚀 Start Frontend Server
       working-directory: ./client
-      run: npm start &
+      run: |
+        echo "🚀 Starting React development server..."
+        CI=true npm start &
 
     - name: ⏳ Wait for Frontend
       run: |
-        timeout 60 bash -c 'until curl -f http://localhost:3000; do sleep 1; done'
+        echo "⏳ Waiting for frontend server to start..."
+        timeout 60 bash -c 'until curl -f http://localhost:3000; do echo "Waiting for frontend..."; sleep 2; done' || (echo "❌ Frontend failed to start" && exit 1)
+        echo "✅ Frontend server is running!"
+
+    - name: 🔍 Debug Server Status
+      run: |
+        echo "🔍 Checking server status..."
+        echo "Backend status:"
+        curl -f http://localhost:5000 || echo "Backend not responding"
+        echo "Frontend status:"
+        curl -f http://localhost:3000 || echo "Frontend not responding"
+        echo "Process list:"
+        ps aux | grep -E "(node|npm)" | grep -v grep || echo "No Node processes found"
 
     - name: 🎭 Run Cypress Tests
       working-directory: ./client
-      run: npx cypress run --spec cypress/e2e/ui-tests.spec.js
+      run: |
+        echo "🎭 Starting Cypress E2E tests..."
+        npx cypress run --spec cypress/e2e/ui-tests.spec.js --reporter spec || (echo "❌ Cypress tests failed" && exit 1)
+        echo "✅ All Cypress tests passed!"
 
     - name: 📸 Upload Screenshots
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: failure()
       with:
         name: cypress-screenshots-${{ matrix.node-version }}
         path: client/cypress/screenshots
 
     - name: 🎥 Upload Videos
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: failure()
       with:
         name: cypress-videos-${{ matrix.node-version }}
@@ -132,18 +156,29 @@ jobs:
         cd server && npm ci
         cd client && npm ci
 
-    - name: 🔍 Run ESLint (Server)
+    - name: 🔍 Check ESLint Installation (Server)
       working-directory: ./server
-      run: npx eslint . --ext .js || true
+      run: |
+        if npm list eslint >/dev/null 2>&1; then
+          echo "ESLint found, running linter..."
+          npx eslint . --ext .js --fix-dry-run || echo "ESLint found issues but continuing..."
+        else
+          echo "ESLint not installed in server, skipping server linting..."
+        fi
 
     - name: 🔍 Run ESLint (Client)
       working-directory: ./client
-      run: npx eslint src --ext .js,.jsx || true
+      run: |
+        echo "Running ESLint on React client..."
+        npx eslint src --ext .js,.jsx --max-warnings 10 || echo "ESLint found issues but continuing..."
 
     - name: 🛡️ Run Security Audit
       run: |
-        cd server && npm audit --audit-level=high || true
-        cd client && npm audit --audit-level=high || true
+        echo "🛡️ Running security audit on server..."
+        cd server && (npm audit --audit-level=high && echo "✅ Server: No high-risk vulnerabilities found") || echo "⚠️ Server: Some vulnerabilities found, but continuing..."
+        echo "🛡️ Running security audit on client..."
+        cd ../client && (npm audit --audit-level=high && echo "✅ Client: No high-risk vulnerabilities found") || echo "⚠️ Client: Some vulnerabilities found, but continuing..."
+        echo "✅ Security audit completed"
 
   # Deployment Readiness Check
   deployment-check:
