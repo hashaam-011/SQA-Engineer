@@ -159,7 +159,7 @@ jobs:
       run: |
         echo "🎭 Starting Cypress E2E tests..."
         echo "Available specs: $(find cypress/e2e -name '*.spec.js' 2>/dev/null | head -10 || echo 'No spec files found')"
-        
+
         # Try to run Cypress tests with multiple fallback strategies
         if npx cypress run --spec cypress/e2e/ui-tests.spec.js --reporter spec --browser electron --headless 2>/dev/null; then
           echo "✅ Cypress tests completed successfully"
@@ -176,20 +176,20 @@ jobs:
       continue-on-error: true
       run: |
         echo "🧹 Cleaning up server processes..."
-        
+
         # Clean up PID files if they exist
         [ -f backend.pid ] && kill $(cat backend.pid) 2>/dev/null && echo "Backend process stopped" || echo "Backend process not running"
         [ -f frontend.pid ] && kill $(cat frontend.pid) 2>/dev/null && echo "Frontend process stopped" || echo "Frontend process not running"
-        
+
         # Remove PID files
         rm -f backend.pid frontend.pid 2>/dev/null || true
-        
+
         # Kill any remaining processes (more comprehensive cleanup)
         pkill -f "node.*:5000" 2>/dev/null || echo "No backend processes found on port 5000"
         pkill -f "node.*:3000" 2>/dev/null || echo "No frontend processes found on port 3000"
         pkill -f "react-scripts start" 2>/dev/null || echo "No React dev server processes found"
         pkill -f "npm start" 2>/dev/null || echo "No npm start processes found"
-        
+
         echo "✅ Cleanup process completed successfully"
 
     - name: 📸 Upload Screenshots
